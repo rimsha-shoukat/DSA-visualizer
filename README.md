@@ -16,4 +16,4 @@ Users can *create accounts, track their progress, and practice DSA topics* like 
 
 ### Clone the repository  
 ```bash
-https://github.com/your-username/dsa-visualizer.git
+https://github.com/rimsha-shoukat/dsa-visualizer.git
