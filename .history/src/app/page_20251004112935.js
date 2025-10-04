@@ -5,9 +5,9 @@ export default function Home() {
 
   return (
     <div className="w-[100%] h-[100%] transition-all duration-300">
-      <div className="w-[100%] h-auto flex flex-row items-center max-[580px]:items-end max-[580px]:justify-end justify-between py-4 pl-3">
-        <h1 className="text-[1.5rem] max-[580px]:hidden text-[#2962ff] font-semibold">DSAvisualizer</h1>
-        <Navbar/>
+      <div className="w-[100%] h-auto flex flex-row items-center justify-between max-[480px]:items-end max-[480px]:justify-end py-4 pl-3">
+        <h1 className="text-[1.5rem] max-[480px]:hidden text-[#2962ff] font-semibold">DSAvisualizer</h1>
+        <Navbar />
       </div>
       <div className="w-[100%] h-auto flex flex-col items-center justify-center gap-12 mt-[6rem]">
         <div className="flex flex-col items-start justify-start">
