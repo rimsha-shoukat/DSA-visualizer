@@ -12,8 +12,8 @@ export default function Home() {
       <div className="w-[100%] h-auto flex flex-col items-center justify-center gap-12 mt-[6rem]">
         <div className="flex flex-col items-start justify-start">
           <h2 className="text-[#2962ff] leading-4 z-10 font-semibold">Learn & practice</h2>
-          <h1 className="text-[4rem] max-[540px]:text-[3rem] max-[390px]:text-[2.5rem] font-semibold">Data Structure </h1>
-          <h1 className="text-[4rem] max-[540px]:text-[3rem] max-[390px]:text-[2.5rem] font-semibold">& algorithms</h1>
+          <h1 className="text-[4rem] max font-semibold">Data Structure </h1>
+          <h1 className="text-[4rem] max font-semibold">& algorithms</h1>
         </div>
         <Button className="bg-[#2962ff] shadow-md" variant='secondary'>Explore</Button>
       </div>
