@@ -3,14 +3,12 @@ import { FcGoogle } from "react-icons/fc";
 import { SiLinkedin } from "react-icons/si";
 import { FaGithub } from 'react-icons/fa';
 import { useState } from 'react';
-import validator from 'validator';
 
 export default function login({setLog, setSign}){
     const[email, setEmail] = useState('');
     const[pass, setPass] = useState('');
     const[userError, setUserError] = useState('');
     const[emailError, setEmailError] = useState('');
-    const[passError, setPassError] = useState('');
 
     const users = [
         {
@@ -26,37 +24,10 @@ export default function login({setLog, setSign}){
         setLog(false); 
         setEmail('');
         setPass('');
-        setEmailError('');
-        setPassError('');
-        setUserError('');
     }
 
     const handleFormSubmission = (e) =>{
         e.preventDefault();
-        setEmailError('');
-        setPassError('');
-        setUserError('');
-        if(!validator.isEmail(email)){
-            setEmailError('Please enter a valid email address');
-        }else{
-            const user = users.find(user => user.email === email);
-            if(!user){
-                setUserError('User does not exist');
-            }else{
-                if(user.pass === pass){
-                    console.log('user logged in successfully');
-                    setLog(false);
-                    setSign(false);
-                    setEmail('');
-                    setPass('');
-                    setEmailError('');
-                    setPassError('');
-                    setUserError('');
-                }else{
-                    setPassError('Incorrect password');
-                }
-            }
-        }
 
     }
 
@@ -67,14 +38,11 @@ export default function login({setLog, setSign}){
             <form onSubmit={ (e)=> handleFormSubmission(e) } className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 w-[24rem] max-[470px]:w-[18rem] h-auto flex flex-col gap-4 items-center justify-center p-6 backdrop-blur-md bg-white/30 rounded-md">
                     <h1 className="text-[2rem] text-blue-800 font-bold">LOGIN</h1>
                     <input className="rounded-full w-[100%] px-4 py-2 border-none ring-2 ring-gray-300 shadow-md placeholder-gray-700 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-800" 
-                    type="email" value={email} onChange={ (e)=> setEmail(e.target.value) }
+                    type="email" value=
                     placeholder="Email" />
-                    { emailError && <p className="text-red-600 text-xs">{emailError}</p>}
                     <input className="rounded-full w-[100%] px-4 py-2 border-none ring-2 ring-gray-300 shadow-md placeholder-gray-700 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-800" 
-                    type="password" value={pass} onChange={ (e)=> setPass(e.target.value) }
+                    type="password" 
                     placeholder="Password" />
-                    { passError && <p className="text-red-600 text-xs">{passError}</p>}
-                    { userError && <p className="text-red-600 text-xs">{userError}</p>}
                     <button type='submit' className="rounded-full w-[100%] bg-blue-800 hover:shadow-md font-semibold py-2 mt-4">LOGIN</button>
                     <div className="flex flex-row items-center justify-between w-[100%] mb-2">
                         <p className="text-red-900 hover:underline">Forgot Password?</p>

@@ -10,7 +10,7 @@ export default function login({setLog, setSign}){
     const[pass, setPass] = useState('');
     const[userError, setUserError] = useState('');
     const[emailError, setEmailError] = useState('');
-    const[passError, setPassError] = useState('');
+    const{passError, setPassError} = useState('');
 
     const users = [
         {
@@ -44,16 +44,14 @@ export default function login({setLog, setSign}){
                 setUserError('User does not exist');
             }else{
                 if(user.pass === pass){
-                    console.log('user logged in successfully');
-                    setLog(false);
-                    setSign(false);
+                    console.log('user loged in sucessfully');
                     setEmail('');
-                    setPass('');
-                    setEmailError('');
-                    setPassError('');
-                    setUserError('');
+        setPass('');
+        setEmailError('');
+        setPassError('');
+        setUserError('');
                 }else{
-                    setPassError('Incorrect password');
+                    setPassError('Incorrect password')
                 }
             }
         }

@@ -10,7 +10,7 @@ export default function login({setLog, setSign}){
     const[pass, setPass] = useState('');
     const[userError, setUserError] = useState('');
     const[emailError, setEmailError] = useState('');
-    const[passError, setPassError] = useState('');
+    const{passError, setPassError} = useState('');
 
     const users = [
         {
@@ -53,7 +53,7 @@ export default function login({setLog, setSign}){
                     setPassError('');
                     setUserError('');
                 }else{
-                    setPassError('Incorrect password');
+                    setPassError('Incorrect password')
                 }
             }
         }

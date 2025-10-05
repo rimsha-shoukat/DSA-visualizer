@@ -10,7 +10,7 @@ export default function login({setLog, setSign}){
     const[pass, setPass] = useState('');
     const[userError, setUserError] = useState('');
     const[emailError, setEmailError] = useState('');
-    const[passError, setPassError] = useState('');
+    const{passError, setPassError} = useState('');
 
     const users = [
         {
@@ -26,9 +26,6 @@ export default function login({setLog, setSign}){
         setLog(false); 
         setEmail('');
         setPass('');
-        setEmailError('');
-        setPassError('');
-        setUserError('');
     }
 
     const handleFormSubmission = (e) =>{
@@ -36,27 +33,7 @@ export default function login({setLog, setSign}){
         setEmailError('');
         setPassError('');
         setUserError('');
-        if(!validator.isEmail(email)){
-            setEmailError('Please enter a valid email address');
-        }else{
-            const user = users.find(user => user.email === email);
-            if(!user){
-                setUserError('User does not exist');
-            }else{
-                if(user.pass === pass){
-                    console.log('user logged in successfully');
-                    setLog(false);
-                    setSign(false);
-                    setEmail('');
-                    setPass('');
-                    setEmailError('');
-                    setPassError('');
-                    setUserError('');
-                }else{
-                    setPassError('Incorrect password');
-                }
-            }
-        }
+        if()
 
     }
 

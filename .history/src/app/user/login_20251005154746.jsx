@@ -10,7 +10,7 @@ export default function login({setLog, setSign}){
     const[pass, setPass] = useState('');
     const[userError, setUserError] = useState('');
     const[emailError, setEmailError] = useState('');
-    const[passError, setPassError] = useState('');
+    const{passError, setPassError} = useState('');
 
     const users = [
         {
