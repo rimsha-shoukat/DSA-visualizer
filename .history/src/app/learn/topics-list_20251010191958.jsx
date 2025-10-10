@@ -53,9 +53,6 @@ export default function topicsList({setList}){
                 <input onChange={(e)=> handleSearch(e.target.value)} className="rounded-full w-[100%] px-4 py-2 border-none ring-2 ring-gray-300 placeholder-gray-700 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-800" placeholder="Search" type="text" />
             <div className="flex flex-col gap-2 w-[100%] h-[22rem] overflow-y-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {
-                    error && <p className="text-red-700 text-sm">{error}</p>
-                }
-                {
                     filterTopics.map((t)=> (
                         <div key={t.id} className="rounded-md bg-[#d9d9d9]/50 dark:bg-[#23364a]/70 hover:bg-[#d9d9d9] dark:hover:bg-[#23364a] p-4 shadow-sm">
                             <h1>{t.topic}</h1>
