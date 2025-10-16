@@ -42,6 +42,7 @@ export default function Signup({ setLog, setSign }) {
             setIsError(false);
             setForm({ name: "", email: "", password: "" });
         } catch (err) {
+            console.error('Frontend error:', err);
             setMessage('Network error. Please check your connection.');
             setIsError(true);
         }

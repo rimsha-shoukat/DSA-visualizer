@@ -5,51 +5,49 @@ import { FaGithub } from 'react-icons/fa';
 import { useState } from 'react';
 
 export default function login({ setLog, setSign }) {
-    const [form, setForm] = useState({ email: '', password: '' });
+    const [form, setForm] = useState({name:'', password:''});
     const [message, setMessage] = useState('');
-    const [isError, setIsError] = useState(false);
 
     const handleClick = (e) => {
         e.preventDefault();
         setSign(true);
         setLog(false);
-        setForm({ email: '', password: '' });
-        setIsError(false)
+        setForm({name:'', email});
     }
 
-    const handleFormSubmission = async (e) => {
+    const handleFormSubmission = (e) => {
         e.preventDefault();
-        setMessage('');
-        setIsError(false);
-
-        if (!form.email || !form.password) {
-            setMessage('Email and password are required');
-            setIsError(true);
-            return;
-        }
-
-        try {
-            const res = await fetch('/login-action', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form),
-            });
-            const data = await res.json();
-
-            if (!res.ok) {
-                setMessage(data.message || 'Login failed');
-                setIsError(true);
-                return;
+        setEmailError('');
+        setPassError('');
+        setUserError('');
+        let validEmail = email.includes('@');
+        let validUser = users.find(user => user.email === email);
+        let validPass = users.find(user => (user.email === email) && (user.pass === pass));
+        
+        switch(true) {
+            case (!pass || !email) : 
+                setUserError('Please fill all required fields');
+                break;
+            case (!validEmail) : 
+                setEmailError('Please enter a valid email address');
+                break;
+            case (!validUser) : 
+                setUserError('User does not exist');
+                break;
+            case (!validPass) : 
+                setPassError('Incorrect email or password');
+                break;
+            default : {
+                console.log('user logged in successfully');
+                setLog(false);
+                setSign(false);
+                setEmail('');
+                setPass('');
+                setEmailError('');
+                setPassError('');
+                setUserError('');
             }
-            setMessage(data.message || 'Login successful!');
-            setIsError(false);
-
-        } catch (err) {
-            setMessage('Network error. Please try again.');
-            setIsError(true);
         }
-        setSign(false);
-        setLog(false);
     }
 
     return (
@@ -59,18 +57,14 @@ export default function login({ setLog, setSign }) {
             <form onSubmit={(e) => handleFormSubmission(e)} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 w-[24rem] max-[470px]:w-[18rem] h-auto flex flex-col gap-4 items-center justify-center p-6 backdrop-blur-md bg-white/30 rounded-md">
                 <h1 className="text-[2rem] text-blue-800 font-bold">LOGIN</h1>
                 <input className="rounded-full w-[100%] px-4 py-2 border-none ring-2 ring-gray-300 shadow-md placeholder-gray-700 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-800"
-                    type="email" value={form.email || ''} 
-                    onChange={(e) => setForm({ ...form, email: e.target.value.toLowerCase() })}
+                    type="email" value={email} onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email" />
+                {emailError && <p className="text-red-600 text-xs">{emailError}</p>}
                 <input className="rounded-full w-[100%] px-4 py-2 border-none ring-2 ring-gray-300 shadow-md placeholder-gray-700 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-800"
-                    type="password" 
-                    value={form.password || ''} 
-                    onChange={(e) => setForm({ ...form, password: e.target.value })}
+                    type="password" value={pass} onChange={(e) => setPass(e.target.value)}
                     placeholder="Password" />
-
-                {message &&
-                    <p className={`text-xs ${isError ? 'text-red-600' : 'text-green-600'}`}> {message} </p>            
-                }
+                {passError && <p className="text-red-600 text-xs">{passError}</p>}
+                {userError && <p className="text-red-600 text-xs">{userError}</p>}
                 <button type='submit' className="rounded-full w-[100%] bg-blue-800 hover:shadow-md font-semibold py-2 mt-4">LOGIN</button>
                 <div className="flex flex-row items-center justify-between w-[100%] mb-2 max-[470px]:text-xs">
                     <p className="text-red-900 hover:underline">Forgot Password?</p>

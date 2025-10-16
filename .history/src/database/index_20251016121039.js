@@ -21,6 +21,8 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.index({ _id: 1 });  
+
 export const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 export const connectDB = async () => {

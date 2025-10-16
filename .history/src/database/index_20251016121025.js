@@ -21,10 +21,13 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+userSchema.index({ _id: 1 });  
+
 export const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 export const connectDB = async () => {
   if (cached.conn) {
+    console.log('>>>>>Already connected to MongoDB<<<<<');
     return cached.conn;
   }
 
@@ -52,5 +55,6 @@ export const connectDB = async () => {
     cached.promise = null;
     throw e;
   }
+
   return cached.conn;
 };

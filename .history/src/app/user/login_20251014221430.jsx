@@ -5,7 +5,7 @@ import { FaGithub } from 'react-icons/fa';
 import { useState } from 'react';
 
 export default function login({ setLog, setSign }) {
-    const [form, setForm] = useState({ email: '', password: '' });
+    const [form, setForm] = useState({ name: '', password: '' });
     const [message, setMessage] = useState('');
     const [isError, setIsError] = useState(false);
 
@@ -22,12 +22,6 @@ export default function login({ setLog, setSign }) {
         setMessage('');
         setIsError(false);
 
-        if (!form.email || !form.password) {
-            setMessage('Email and password are required');
-            setIsError(true);
-            return;
-        }
-
         try {
             const res = await fetch('/login-action', {
                 method: 'POST',
@@ -35,7 +29,6 @@ export default function login({ setLog, setSign }) {
                 body: JSON.stringify(form),
             });
             const data = await res.json();
-
             if (!res.ok) {
                 setMessage(data.message || 'Login failed');
                 setIsError(true);
@@ -43,7 +36,6 @@ export default function login({ setLog, setSign }) {
             }
             setMessage(data.message || 'Login successful!');
             setIsError(false);
-
         } catch (err) {
             setMessage('Network error. Please try again.');
             setIsError(true);
@@ -59,19 +51,14 @@ export default function login({ setLog, setSign }) {
             <form onSubmit={(e) => handleFormSubmission(e)} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 w-[24rem] max-[470px]:w-[18rem] h-auto flex flex-col gap-4 items-center justify-center p-6 backdrop-blur-md bg-white/30 rounded-md">
                 <h1 className="text-[2rem] text-blue-800 font-bold">LOGIN</h1>
                 <input className="rounded-full w-[100%] px-4 py-2 border-none ring-2 ring-gray-300 shadow-md placeholder-gray-700 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-800"
-                    type="email" value={form.email || ''} 
-                    onChange={(e) => setForm({ ...form, email: e.target.value.toLowerCase() })}
+                    type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="Email" />
                 <input className="rounded-full w-[100%] px-4 py-2 border-none ring-2 ring-gray-300 shadow-md placeholder-gray-700 focus:outline-none focus:border-none focus:ring-2 focus:ring-blue-800"
-                    type="password" 
-                    value={form.password || ''} 
-                    onChange={(e) => setForm({ ...form, password: e.target.value })}
+                    type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })}
                     placeholder="Password" />
-
-                {message &&
-                    <p className={`text-xs ${isError ? 'text-red-600' : 'text-green-600'}`}> {message} </p>            
-                }
-                <button type='submit' className="rounded-full w-[100%] bg-blue-800 hover:shadow-md font-semibold py-2 mt-4">LOGIN</button>
+                    {message && (
+                    <p className={`text-xs ${isError ? 'text-red-600' : 'text-green-600'}`}> {message} </p>                
+                    <button type='submit' className="rounded-full w-[100%] bg-blue-800 hover:shadow-md font-semibold py-2 mt-4">LOGIN</button>
                 <div className="flex flex-row items-center justify-between w-[100%] mb-2 max-[470px]:text-xs">
                     <p className="text-red-900 hover:underline">Forgot Password?</p>
                     <p onClick={(e) => handleClick(e)} className="cursor-default text-blue-900 font-bold">Sign Up</p>
