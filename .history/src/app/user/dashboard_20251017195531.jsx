@@ -1,0 +1,24 @@
+'use client';
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+
+export default function Dashboard({setBoard}){
+    return(
+        <>
+            <div onClick={() => { setBoard(false); }} className="w-[100%] h-[100%] absolute top-0 left-0 backdrop-blur-md inset-0 transition-all duration-300 flex items-center justify-center">
+            </div>
+            <div className="w-[30rem] h-auto absolute top-1/2 left-1/2  -translate-x-1/2 -translate-y-1/2 bg-white/30 rounded-md backdrop-blur-md p-4 flex flex-col gap-4">
+                <h1 className="text-[2rem] text-blue-800 font-bold">DASHBOARD</h1>
+                <div className="flex flex-row items-center justify-between w-[100%]">
+                    <Input type="text" placeholder="Name" />
+                    <Input type="email" placeholder="Email" />
+                </div>
+                <div className="w-[100%] h-[5rem] border-2 border-blue-800 p-2 rounded-sm">No Analytics yet!</div>
+                <Button  onClick={() =>
+          toast.warning("Event start time cannot be earlier than 8am")
+        }        className="bg-red-800 px-4 py-2" variant="outline">Logout</Button>
+            </div>
+        </>
+    )
+}
