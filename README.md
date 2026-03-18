@@ -23,11 +23,6 @@ Users can *create accounts, track their progress, and practice DSA topics* like 
 
 ---
 
-### Clone the repository  
-```bash
-    git clone https://github.com/rimsha-shoukat/dsa-visualizer.git
-```
-
 ## Contact
 
 Feel free to reach out to me via [LinkedIn](https://www.linkedin.com/in/rimsha-shoukat).
